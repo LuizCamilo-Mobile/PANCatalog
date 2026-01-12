@@ -80,6 +80,9 @@ Essa separação reduz acoplamento, facilita testes e torna a base preparada par
 
 ---
 
+## 🧩 Estrutura de Pacotes
+
+```text
 br.com.pancatalog
  ├─ ui
  │   ├─ MainActivity
@@ -98,6 +101,7 @@ br.com.pancatalog
  └─ core
      └─ logging
          └─ AppLogger
+
 
 
 ---
