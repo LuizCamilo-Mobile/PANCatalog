@@ -101,9 +101,7 @@ br.com.pancatalog
  └─ core
      └─ logging
          └─ AppLogger
-
-
-
+```
 ---
 
 ## ▶️ Como Rodar o Projeto
@@ -147,3 +145,4 @@ br.com.pancatalog
 
 Luiz Camilo  
 Desenvolvedor Android
+
