@@ -7,11 +7,13 @@ import androidx.recyclerview.widget.ListAdapter
 import br.com.pancatalog.databinding.RowItemBinding
 import br.com.pancatalog.domain.model.Item
 
-class ItemAdapter : ListAdapter<Item, ItemViewHolder>(DIFF) {
+class ItemAdapter(
+    private val onItemClick: (Item) -> Unit
+) : ListAdapter<Item, ItemViewHolder>(DIFF) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val binding = RowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ItemViewHolder(binding)
+        return ItemViewHolder(binding, onItemClick)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {

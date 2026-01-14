@@ -1,4 +1,4 @@
-package br.com.pancatalog.ui.catalog
+package br.com.pancatalog.ui.catalog.state
 
 import br.com.pancatalog.domain.model.Item
 

@@ -1,5 +1,6 @@
 package br.com.pancatalog.ui.catalog
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -11,7 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.pancatalog.R
 import br.com.pancatalog.databinding.FragmentCatalogBinding
 import br.com.pancatalog.ui.catalog.adapter.ItemAdapter
+import br.com.pancatalog.ui.catalog.state.CatalogUiState
+import br.com.pancatalog.ui.catalog.vm.CatalogViewModel
 import kotlinx.coroutines.launch
+import kotlin.jvm.java
 
 class CatalogFragment : Fragment(R.layout.fragment_catalog) {
 
@@ -19,7 +23,15 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
     private val binding get() = _binding!!
 
     private val viewModel: CatalogViewModel by viewModels()
-    private val adapter = ItemAdapter()
+
+    private val adapter = ItemAdapter { item ->
+        val intent = Intent(requireContext(), DetailActivity::class.java).apply {
+            putExtra(DetailActivity.EXTRA_ID, item.id)
+            putExtra(DetailActivity.EXTRA_TITLE, item.title)
+            putExtra(DetailActivity.EXTRA_SUBTITLE, item.subtitle)
+        }
+        startActivity(intent)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,6 +42,10 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
 
         binding.retry.setOnClickListener { viewModel.load() }
 
+        collectUiState()
+    }
+
+    private fun collectUiState() {
         // Coleta segura do Flow: respeita lifecycle do Fragment view
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
